@@ -1,10 +1,11 @@
 ---
 title: 网站中使用markdown并实现代码高亮
 key: 20180415
-tags: TeXt
+tags: markdown
 ---
 
 在django管理后台admin中集成mardown模块
+
 <!--more-->
 
 ### 需求：
@@ -27,7 +28,7 @@ tags: TeXt
 
 以下步骤是我个人在集成中使用的方法，参照自官方文档，因为有一些需求在文档中没找到明确的说明，于是部分结合了stackoverflow上的回答，这里做个总结备忘。
 
-### 1. 在admin页面集成markdwon编辑器
+### 在admin页面集成markdwon编辑器
 
 这一步基本按照官方文档一步步进行就能完成。
 首先安装django-markdwonx：
