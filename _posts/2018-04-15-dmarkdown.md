@@ -19,8 +19,6 @@ django with markdown
 + django==1.11.6
 + django-markdownx==2.0.22
 
----------------------------------------
-
 之前在网站后台写文章使用的是百度的`UEditor`编辑器，该编辑器没有官方的django版本，我用的是第三方作者开发的DjangoUeditor。这个编辑器功能很多，但是使用体验不太好，代码高亮渲染后样式有点奇怪，而且我也用不了那么多功能，有点冗余。于是想换用轻量级markdown编辑器，也能轻松实现自己想要的文章格式。
 
 在<a href="https://djangopackages.org/grids/g/markdown/" target="_blank">djangopackages</a>这个网站上比较了几款markdown应用，选择了<a href="https://github.com/neutronX/django-markdownx" target="_blank">django-markdownx</a>。
