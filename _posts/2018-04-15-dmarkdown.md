@@ -1,7 +1,7 @@
 ---
 title: 网站后台集成markdown并实现代码高亮
 key: 20180415
-tags: TeXt
+tags: django markdown
 ---
 
 django with markdown
@@ -9,8 +9,8 @@ django with markdown
 
 ### 需求：
 
-1.  个人博客网站，在管理后台admin增加文章时，使用markdwon编辑器写文章；
-2.  在博客显示页面将markdwon文章渲染成带格式的html；
+1. 个人博客网站，在管理后台admin增加文章时，使用markdwon编辑器写文章；
+2. 在博客显示页面将markdwon文章渲染成带格式的html；
 3. 文章内容中实现代码高亮；
 4. 修改编辑器的默认样式。
 
@@ -18,6 +18,8 @@ django with markdown
 
 + django==1.11.6
 + django-markdownx==2.0.22
+
+---------------------------------------
 
 之前在网站后台写文章使用的是百度的`UEditor`编辑器，该编辑器没有官方的django版本，我用的是第三方作者开发的DjangoUeditor。这个编辑器功能很多，但是使用体验不太好，代码高亮渲染后样式有点奇怪，而且我也用不了那么多功能，有点冗余。于是想换用轻量级markdown编辑器，也能轻松实现自己想要的文章格式。
 
@@ -70,7 +72,7 @@ django with markdown
 
 ![截图.png](https://note.youdao.com/yws/res/12842/WEBRESOURCEadc315dd842815d2284ce9d906badf8c)
 
-### 将markdown文章渲染成带格式的html
+### 2. 将markdown文章渲染成带格式的html
 
 这个功能在django-markdownx包中已经实现，但是在它的文档中并没有明确提到，我google了一下，在stackoverflow上找到解决方法，其实很简单，只是因为我第一次使用markdown，没有弄清原理。
 
@@ -102,7 +104,7 @@ django with markdown
 
 这样文章内容就能正常按格式显示在浏览器中。
 
-### 文章内容中代码的高亮
+### 3. 文章内容中代码的高亮
 
 这需要用到markdown的extentions中的模块，markdown自带<a href="https://python-markdown.github.io/extensions/code_hilite/" target="_blank">CodeHilite</a>模块。
 
@@ -123,18 +125,14 @@ django with markdown
 
 刷新页面后会发现你文章中的代码块已经可以高亮了。
 
-### 修改编辑器的默认样式
+### 4. 修改编辑器的默认样式
 
-默认情况下，配置好的编辑器如图所示：
-
-![](/media/markdownx/9ca74022-28a4-4c5c-916c-588aecd7c986.png)
-
-编辑器和预览上下排列，当书写内容多了以后非常不方便查看，这里将其设置为左右排列。
+默认情况下，配置好的编辑器是编辑器和预览上下排列，当书写内容多了以后非常不方便查看，这里将其设置为左右排列。
 
 在项目文件夹下面`templates`文件夹下创建`markdownx`文件夹，并将`markdownx/templates/markdownx/widget2.html`复制到新建的markdownx文件夹（对于django<1.11，复制widget.html文件）。`widget2.html`文件中原来的代码为：
 
 	<div class="markdownx">
-	    {% include 'django/forms/widgets/textarea.html' %}
+	    {% raw %}{% include 'django/forms/widgets/textarea.html' %}{% endraw %}
 	    <div class="markdownx-preview"></div>
 	</div>
 
@@ -142,17 +140,17 @@ django with markdown
 
 
 ```
-	<br><br>
-	<div class="container-fluid">
-	<div class="row markdownx">
-	    <div class="col-lg-6">
-	    {% include 'django/forms/widgets/textarea.html' %}
-	    </div>
-	    <div class="col-lg-6">
-	    <div class="markdownx-preview"></div>
-	    </div>
-	</div>
-	</div>
+<br><br>
+<div class="container-fluid">
+<div class="row markdownx">
+    <div class="col-lg-6">
+    {% raw %}{% include 'django/forms/widgets/textarea.html' %}{% endraw %}
+    </div>
+    <div class="col-lg-6">
+    <div class="markdownx-preview"></div>
+    </div>
+</div>
+</div>
 ```
 
 因为修改后的html中用到了css col-lg-6，所以该页面所在的模板中应该要包含`bootstrap`的css文件。
@@ -167,4 +165,5 @@ django with markdown
 	)
 	FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
-重启服务后，编辑器和预览栏就横排显示了
+重启服务后，编辑器和预览栏就横排显示了。
+
