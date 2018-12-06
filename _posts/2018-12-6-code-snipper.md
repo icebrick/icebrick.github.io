@@ -97,8 +97,6 @@ def your_view(request):
 
 ### 预激协程的装饰器
 
-fluent python 16.4
-
 ```
 from functools import wraps
 
@@ -112,8 +110,6 @@ def coroutine(func):
 ```
 
 ### 使用动态属性访问JSON类数据
-
-《流畅的Python》19.1
 
 ```
 from collections import abc
@@ -139,8 +135,6 @@ class FrozenJSON:
 ```
 
 ### 字典key转化为对象属性
-
-tornado source code: `tornado.util.ObjectDict`
 
 ```
 try:
@@ -191,9 +185,8 @@ def get_model_field(model_class, data):
 
 ### django从大到小排序pg数据库数据时null值排在前问题
 
-原理是利用django的Func，新建一个字段，原始字段为null时为False，否则为True，排序时先对这个新建字段排序，再对原始字段排序，这样，为null的值都将在列表尾端。
-
 ```
+# 原理是利用django的Func，新建一个字段，原始字段为null时为False，否则为True，排序时先对这个新建字段排序，再对原始字段排序，这样，为null的值都将在列表尾端。
 from django.db.models import Func
 
 class IsNull(Func):
