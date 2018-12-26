@@ -4,15 +4,15 @@ key: 20181226
 tags: python 闭包
 ---
 
-在阅读tornado源码时发现一段有意思的关于闭包和局部变量的用法的小技巧，理解之后可以加深自己对python这个语言特性的理解
+在阅读tornado源码时发现一段有意思的关于闭包和局部变量的用法的小技巧，思考之后可以加深自己对python这个语言特性的理解
 <!--more-->
 
 最近在看tornado源码的时候，发现了一段挺有意思的代码：
 ```python
 def run_sync(self, func, timeout=None):
-    
+
     future_cell = [None]
-    
+
     def run():
         try:
             result = func()
