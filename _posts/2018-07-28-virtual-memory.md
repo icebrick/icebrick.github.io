@@ -26,7 +26,7 @@ tags: 虚拟内存
 **虚拟寻址**
 
 使用虚拟寻址，CPU通过生成一个虚拟地址(Virtual Address, VA)来访问主存，这个虚拟地址由CPU芯片上一个叫做**内存管理单元**(Memory Management Unit, MMU)的专用硬件翻译成相应的物理地址，然后通过这个物理地址来访问主存。如下图所示：
-![image](http://pkea04tb8.bkt.clouddn.com/123.PNG)
+![image](http://image.jaydenfoo.com/uploads/big/35fa76a567046b4b08191428095d23c3.PNG)
 
 #### 地址空间
 
