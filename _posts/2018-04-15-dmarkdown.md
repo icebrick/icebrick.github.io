@@ -70,7 +70,7 @@ django with markdown
 当再次打开网站的admin页面时，content这个字段已经被渲染成markdown编辑器，上边的文本输入框输入用markdown语法编写的内容，下边即时显示带格式文本。
 它会自动处理好图片的上传，只要我们事先设置好`MEDIA_ROOT`和`MEDIA_URL`。
 
-![截图.png](https://note.youdao.com/yws/res/12842/WEBRESOURCEadc315dd842815d2284ce9d906badf8c)
+![image](http://image.jaydenfoo.com/uploads/big/31d828b3d1bc6342c20c3cbf8fc2034b.PNG)
 
 ### 2. 将markdown文章渲染成带格式的html
 
