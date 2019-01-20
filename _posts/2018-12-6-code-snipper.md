@@ -268,3 +268,27 @@ fh.setFormatter(formatter)
 logger.addHandler(sh)
 logger.addHandler(fh)
 ```
+
+### 文件编码识别
+
+```python
+import chardet
+
+def get_encoding(file):
+    # 二进制方式读取，获取字节数据，检测类型
+    with open(file, 'rb') as f:
+        return chardet.detect(f.read())['encoding']
+```
+
+### 文件编码转换
+
+```python
+def convert(filename, in_enc="GB2312", out_enc="utf-8"):
+        print("convert " + filename)
+        content = open(filename).read()
+        print('content',content)
+        new_content = content.decode(in_enc,'ignore').encode(out_enc)
+        open(filename, 'w').write(new_content)
+        print(" done")
+```
+

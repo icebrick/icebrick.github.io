@@ -39,6 +39,31 @@ ffmpeg -i input.mp4 -ss 00:00:01 -vf fps=1 -vframes 3 out%d.png
 # 将多张图片转化为gif, -framerate 1/2表示生成的gif每张图持续2秒，in%d.png表示使用类似in1.png/in2.png这种命名格式的图片，将out.gif改为out.mp4可生成视频
 ffmpeg -framerate 1/2 -i in%d.png out.gif
 # 去除视频logo，加上show=1，生成的视频在logo处将有一个矩形框，用于调试时确定位置
-ffmpeg -i inout.mp4 -vf delogo=x=10:y=10:w=100:h=70:show=1 output.mp4
+ffmpeg -i input.mp4 -vf delogo=x=10:y=10:w=100:h=70:show=1 output.mp4
+# 压缩视频大小，根据码率
+ffmpeg -i input.mp4 -b:v 700k output.mp4
+# 截取视频中指定的时间段，如从10秒开始截取20秒视频
+ffmpeg -i input.mp4 -ss 00:00:10 -t 00:00:20 output.mp4
+```
+
+### go跨平台编译
+
+```bash
+# 在linux中编译，mac平台和windos 64平台使用
+CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build main.go
+CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go
+# 在mac中编译，linux和windows 64平台使用
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
+CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go
+# 在windows中编译，在mac和linux 64中使用
+SET CGO_ENABLED=0
+SET GOOS=darwin
+SET GOARCH=amd64
+go build main.go
+
+SET CGO_ENABLED=0
+SET GOOS=linux
+SET GOARCH=amd64
+go build main.go
 ```
 
