@@ -8,5 +8,7 @@ tags: MySQL
 
 <!--more-->
 
+查看详情需要点击下方的”打开文件“
+
 <iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:800px; height:1024px;" src="https://www.processon.com/embed/mind/5c41df1ae4b056ae29f55730"></iframe>
 
