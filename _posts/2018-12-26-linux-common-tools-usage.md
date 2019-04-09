@@ -10,6 +10,21 @@ tags: linux
 
 ### curl  
 
+### screen
+
+```bash
+# 新建一个以<name>命名的窗口
+screen -S <name>
+# 分离<name>窗口,需要另开一个terminal
+screen -d <name>
+# 列出所有现存的screen窗口
+screen -ls
+# 回到某个screen窗口
+screen -r <name>
+```
+
+
+
 ### find
 
 ### tar
@@ -23,9 +38,27 @@ tar -cf archive.tar foo bar
 tar -zcf archive.tar.gz foo bar
 ```
 
+### ps
 
+```bash
+# 查看指定进程内存消耗情况
+ps -eo size,pid,user,command --sort -size | grep http_ad| awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' |cut -d "" -f2 | cut -d "-" -f1
+# 查看服务频响
+tail -f *http_ad*log | grep -P "CONTROL_SERVER" | awk -F'\t' '{split($0,a,/ ts=/); split(a[2],b,/ /);ts=b[1]; num+=1; tts+=ts; if(num==100){print tts,num,tts/num; num=0;tts=0}}'
+# 根据日志计算QPS
+tail -f *http_ad*.log | grep "CONTROL_SERVER" | awk '{print $3; system("")}' | uniq -c
+```
 
 ### awk
+
+### netstat
+
+```bash
+# 查看端口占用情况
+netstat -anp | egrep ":88[0-9]{2} "
+```
+
+
 
 ### ffmpeg  
 

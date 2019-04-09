@@ -284,11 +284,47 @@ def get_encoding(file):
 
 ```python
 def convert(filename, in_enc="GB2312", out_enc="utf-8"):
-        print("convert " + filename)
-        content = open(filename).read()
-        print('content',content)
-        new_content = content.decode(in_enc,'ignore').encode(out_enc)
-        open(filename, 'w').write(new_content)
-        print(" done")
+    print("convert " + filename)
+    content = open(filename).read()
+    print('content',content)
+    new_content = content.decode(in_enc,'ignore').encode(out_enc)
+    open(filename, 'w').write(new_content)
+    print(" done")
+```
+
+### 移除utf8编码文件行首的bom_utf8
+
+```python
+import codecs
+def remove_bom(line):
+     return line[3:] if line.startswith(codecs.BOM_UTF8) else line
+```
+
+
+
+## Go
+
+### 日志处理
+
+```go
+var (
+    Info          *log.Logger
+    Warning       *log.Logger
+    Error         *log.Logger
+)
+
+func init() {
+    // set logger
+    f, err := os.OpenFile("/log/hcms.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+    if err != nil {
+        log.Fatal(err)
+    }
+    gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
+    Info = log.New(f, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
+    Warning = log.New(f, "WARN: ", log.Ldate|log.Ltime|log.Lshortfile)
+    Error = log.New(f, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+}
+
 ```
 
