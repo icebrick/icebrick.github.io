@@ -300,6 +300,28 @@ def remove_bom(line):
      return line[3:] if line.startswith(codecs.BOM_UTF8) else line
 ```
 
+### 线程安全的单例模式
+
+```python
+import threading
+
+class Singleton(object):
+    _ins_lock = threading.Lock()
+    
+    def __init__(self):
+        pass
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, "_ins"):
+            with cls._ins_lock:
+                if not hasattr(cls, "_ins"):
+                    cls._ins = object.__new__(cls)
+        return cls._ins
+    
+obj1 = Singleton()
+obj2 = Singleton()
+assert obj1 == obj2
+```
+
 
 
 ## Go
