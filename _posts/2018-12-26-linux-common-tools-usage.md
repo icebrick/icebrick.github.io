@@ -100,3 +100,19 @@ SET GOARCH=amd64
 go build main.go
 ```
 
+### logrotate使用
+
+```
+# 在/etc/logrotate.d/中新建配置
+/opt/logs/* {
+  rotate 3
+  copytruncate
+  hourly
+  nocompress
+  missingok
+  notifempty
+  dateext
+  dateformat .%Y-%m-%d_%H
+}
+```
+
